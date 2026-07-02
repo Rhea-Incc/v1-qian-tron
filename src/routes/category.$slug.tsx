@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import type { Category } from "@/lib/site";
 import { CATEGORIES, CONTACT, categoryBySlug } from "@/lib/site";
 import { SiteNav, SiteFooter } from "@/components/SiteChrome";
 
@@ -55,7 +56,7 @@ export const Route = createFileRoute("/category/$slug")({
 });
 
 function CategoryPage() {
-  const { category: c } = Route.useLoaderData();
+  const { category: c } = Route.useLoaderData() as { category: Category };
   const others = CATEGORIES.filter((x) => x.slug !== c.slug).slice(0, 4);
 
   return (
