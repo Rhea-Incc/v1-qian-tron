@@ -35,12 +35,28 @@ export function QianTronWordmark({ className, accent, title = "QIANTRON" }: Prop
         const color = accent && i >= 4 ? accent : "currentColor";
 
         if (L === null) {
-          // Custom "A" — apex + two legs, deliberately NO crossbar.
-          const halfBase = cellW * 0.38;
+          // Custom "A" — futuristic chevron: apex chamfered flat, twin legs,
+          // inner diagonal accent bars, NO horizontal crossbar.
+          const halfBase = cellW * 0.4;
+          const chamfer = 10;
+          const leftFootX = cx - halfBase;
+          const rightFootX = cx + halfBase;
+          const apexLX = cx - chamfer;
+          const apexRX = cx + chamfer;
+          const apexY = legApex + 6;
+          // Inner accent verticals — a subtle "tron" glyph inside the A.
+          const innerY1 = 60;
+          const innerY2 = legFoot - 6;
+          const innerHalf = cellW * 0.14;
           return (
-            <g key={`a-${i}`} stroke={color} strokeWidth={stroke} strokeLinecap="square" fill="none">
-              <line x1={cx - halfBase} y1={legFoot} x2={cx} y2={legApex} />
-              <line x1={cx + halfBase} y1={legFoot} x2={cx} y2={legApex} />
+            <g key={`a-${i}`} stroke={color} strokeWidth={stroke} strokeLinecap="square" strokeLinejoin="miter" fill="none">
+              {/* Left leg with chamfered apex */}
+              <polyline points={`${leftFootX},${legFoot} ${apexLX},${apexY} ${apexRX},${apexY} ${rightFootX},${legFoot}`} />
+              {/* Chamfer flat top notch accent */}
+              <line x1={apexLX + 2} y1={apexY - 6} x2={apexRX - 2} y2={apexY - 6} strokeWidth={4} />
+              {/* Inner accent bars — replaces the missing crossbar */}
+              <line x1={cx - innerHalf} y1={innerY1} x2={cx - innerHalf} y2={innerY2} strokeWidth={4} />
+              <line x1={cx + innerHalf} y1={innerY1} x2={cx + innerHalf} y2={innerY2} strokeWidth={4} />
             </g>
           );
         }

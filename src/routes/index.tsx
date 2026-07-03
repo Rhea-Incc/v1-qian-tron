@@ -4,6 +4,7 @@ import jcb from "@/assets/jcb.jpg.asset.json";
 import { CATEGORIES } from "@/lib/site";
 import { SiteNav, SiteFooter } from "@/components/SiteChrome";
 import { QianTronWordmark } from "@/components/QianTronWordmark";
+import { SquareCanvas } from "@/components/SquareCanvas";
 
 const TITLE = "QianTron — Global Sourcing & Machinery Delivery Across Africa";
 const DESC =
@@ -24,19 +25,44 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: HERO_URL },
     ],
     links: [{ rel: "canonical", href: "/" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "QianTron",
-        description: DESC,
-        logo: logo.url,
-        areaServed: "Africa",
-        email: "info@qiantron.lucene.co",
-        telephone: "+2547-2775-0097",
-      }),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "QianTron",
+          description: DESC,
+          logo: logo.url,
+          areaServed: "Africa",
+          email: "info@qiantron.lucene.co",
+          telephone: "+2547-2775-0097",
+          address: { "@type": "PostalAddress", addressLocality: "Nairobi", addressCountry: "KE" },
+          sameAs: [],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "QianTron",
+          url: "/",
+          description: DESC,
+          publisher: { "@type": "Organization", name: "QianTron" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+          ],
+        }),
+      },
+    ],
   }),
 });
 
@@ -47,8 +73,9 @@ function Home() {
 
       {/* ============ Hero ============ */}
       <section className="relative min-h-screen w-full overflow-hidden bg-charcoal text-arch-white">
-        <img src={HERO_URL} alt="Premium heavy machinery" className="absolute inset-0 h-full w-full object-cover opacity-60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-charcoal" />
+        <img src={HERO_URL} alt="Premium heavy machinery" className="absolute inset-0 h-full w-full object-cover opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal" />
+        <SquareCanvas className="pointer-events-none absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-transparent to-charcoal/30" />
 
         <div className="relative mx-auto flex min-h-screen max-w-[1400px] flex-col justify-between px-6 pt-28 pb-14 md:px-10">
