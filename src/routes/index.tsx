@@ -25,19 +25,44 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: HERO_URL },
     ],
     links: [{ rel: "canonical", href: "/" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "QianTron",
-        description: DESC,
-        logo: logo.url,
-        areaServed: "Africa",
-        email: "info@qiantron.lucene.co",
-        telephone: "+2547-2775-0097",
-      }),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "QianTron",
+          description: DESC,
+          logo: logo.url,
+          areaServed: "Africa",
+          email: "info@qiantron.lucene.co",
+          telephone: "+2547-2775-0097",
+          address: { "@type": "PostalAddress", addressLocality: "Nairobi", addressCountry: "KE" },
+          sameAs: [],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "QianTron",
+          url: "/",
+          description: DESC,
+          publisher: { "@type": "Organization", name: "QianTron" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+          ],
+        }),
+      },
+    ],
   }),
 });
 
