@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { CATEGORIES, CONTACT, machineByCode } from "@/lib/site";
+import { CONTACT, machineByCode } from "@/lib/site";
 import type { Category, Machine } from "@/lib/site";
 import { SiteNav, SiteFooter } from "@/components/SiteChrome";
 import { SquareCanvas } from "@/components/SquareCanvas";
@@ -310,5 +310,3 @@ function MachinePage() {
   );
 }
 
-// Silence unused-import warning in strict builds
-void CATEGORIES;
