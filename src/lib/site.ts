@@ -210,3 +210,12 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const categoryBySlug = (slug: string) => CATEGORIES.find((c) => c.slug === slug);
+
+export const machineByCode = (slug: string, code: string) => {
+  const c = categoryBySlug(slug);
+  if (!c) return null;
+  const wanted = code.toLowerCase();
+  const machine = c.machines.find((m) => m.code.toLowerCase() === wanted);
+  if (!machine) return null;
+  return { category: c, machine };
+};
