@@ -14,16 +14,210 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          applications: Json
+          created_at: string
+          gallery: Json
+          hero_image: string
+          highlights: Json
+          id: string
+          intro: string
+          name: string
+          ref: string
+          slug: string
+          sort_order: number
+          tagline: string
+          updated_at: string
+        }
+        Insert: {
+          applications?: Json
+          created_at?: string
+          gallery?: Json
+          hero_image?: string
+          highlights?: Json
+          id?: string
+          intro?: string
+          name: string
+          ref: string
+          slug: string
+          sort_order?: number
+          tagline?: string
+          updated_at?: string
+        }
+        Update: {
+          applications?: Json
+          created_at?: string
+          gallery?: Json
+          hero_image?: string
+          highlights?: Json
+          id?: string
+          intro?: string
+          name?: string
+          ref?: string
+          slug?: string
+          sort_order?: number
+          tagline?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      enquiries: {
+        Row: {
+          admin_notes: string | null
+          category_slug: string | null
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          machine_code: string | null
+          machine_name: string | null
+          message: string
+          name: string
+          phone: string | null
+          status: Database["public"]["Enums"]["enquiry_status"]
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          category_slug?: string | null
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          machine_code?: string | null
+          machine_name?: string | null
+          message: string
+          name: string
+          phone?: string | null
+          status?: Database["public"]["Enums"]["enquiry_status"]
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          category_slug?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          machine_code?: string | null
+          machine_name?: string | null
+          message?: string
+          name?: string
+          phone?: string | null
+          status?: Database["public"]["Enums"]["enquiry_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      machines: {
+        Row: {
+          category_id: string
+          code: string
+          created_at: string
+          id: string
+          image: string
+          name: string
+          sort_order: number
+          specs: Json
+          tag: string
+          updated_at: string
+        }
+        Insert: {
+          category_id: string
+          code: string
+          created_at?: string
+          id?: string
+          image?: string
+          name: string
+          sort_order?: number
+          specs?: Json
+          tag?: string
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string
+          code?: string
+          created_at?: string
+          id?: string
+          image?: string
+          name?: string
+          sort_order?: number
+          specs?: Json
+          tag?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "machines_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      page_views: {
+        Row: {
+          created_at: string
+          id: number
+          path: string
+          referrer: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          path: string
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          path?: string
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
+      enquiry_status: "new" | "contacted" | "quoted" | "closed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +344,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+      enquiry_status: ["new", "contacted", "quoted", "closed"],
+    },
   },
 } as const
