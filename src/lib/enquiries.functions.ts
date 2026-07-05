@@ -68,7 +68,7 @@ export const updateEnquiry = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => statusSchema.parse(input))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase as never, context.userId);
-    const patch: Record<string, unknown> = { status: data.status };
+    const patch: { status: typeof data.status; admin_notes?: string } = { status: data.status };
     if (data.admin_notes !== undefined) patch.admin_notes = data.admin_notes;
     const { error } = await context.supabase.from("enquiries").update(patch).eq("id", data.id);
     if (error) throw new Error(error.message);
