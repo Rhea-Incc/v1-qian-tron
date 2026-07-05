@@ -1,15 +1,24 @@
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import logo from "@/assets/logo-new.png.asset.json";
 import { CONTACT } from "@/lib/site";
 import { QianTronWordmark } from "./QianTronWordmark";
+import { supabase } from "@/integrations/supabase/client";
 
 export function SiteNav() {
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => setSignedIn(!!session));
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
   return (
     <nav className="fixed top-0 z-50 w-full bg-charcoal/85 backdrop-blur-xl border-b border-white/5">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 md:px-10">
         <Link to="/" className="flex items-center gap-3">
           <img src={logo.url} alt="QianTron" className="h-9 w-9 object-contain" />
-          <span className="text-display text-arch-white text-sm font-black tracking-[0.3em]">QIANTRON</span>
+          <QianTronWordmark className="h-5 w-auto" />
         </Link>
         <div className="hidden gap-8 text-[11px] font-medium uppercase tracking-[0.25em] text-arch-white/70 md:flex">
           <Link to="/" className="hover:text-dragon transition" activeProps={{ className: "text-dragon" }}>Home</Link>
@@ -17,6 +26,7 @@ export function SiteNav() {
           <Link to="/services" className="hover:text-dragon transition" activeProps={{ className: "text-dragon" }}>Services</Link>
           <Link to="/category/$slug" params={{ slug: "excavators" }} className="hover:text-dragon transition">Machinery</Link>
           <Link to="/contact" className="hover:text-dragon transition" activeProps={{ className: "text-dragon" }}>Contact</Link>
+          {signedIn && <Link to="/admin" className="text-dragon hover:underline">Admin</Link>}
         </div>
         <Link
           to="/contact"

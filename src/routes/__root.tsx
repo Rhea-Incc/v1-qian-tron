@@ -142,6 +142,24 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    let last = "";
+    async function track(path: string) {
+      if (path === last || path.startsWith("/admin") || path.startsWith("/auth")) return;
+      last = path;
+      try {
+        const { trackPageView } = await import("@/lib/analytics.functions");
+        await trackPageView({ data: { path, referrer: document.referrer } });
+      } catch { /* best-effort */ }
+    }
+    track(router.state.location.pathname);
+    const unsub = router.subscribe("onResolved", ({ toLocation }) => {
+      track(toLocation.pathname);
+    });
+    return () => unsub();
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
