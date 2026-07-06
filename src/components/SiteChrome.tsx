@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import logo from "@/assets/logo-new.png.asset.json";
+import logoAsset from "@/assets/logo-new.png.asset.json";
+import { toAbsoluteUrl } from "@/lib/site";
+const logo = { url: toAbsoluteUrl(logoAsset.url) };
 import { CONTACT } from "@/lib/site";
 import { QianTronWordmark } from "./QianTronWordmark";
 import { supabase } from "@/integrations/supabase/client";

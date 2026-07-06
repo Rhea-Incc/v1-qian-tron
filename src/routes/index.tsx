@@ -1,15 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import logo from "@/assets/logo-new.png.asset.json";
-import jcb from "@/assets/jcb.jpg.asset.json";
-import { CATEGORIES } from "@/lib/site";
+import logoAsset from "@/assets/logo-new.png.asset.json";
+import jcbAsset from "@/assets/jcb.jpg.asset.json";
+import { CATEGORIES, PUBLIC_ORIGIN, toAbsoluteUrl } from "@/lib/site";
 import { SiteNav, SiteFooter } from "@/components/SiteChrome";
 import { QianTronWordmark } from "@/components/QianTronWordmark";
 import { SquareCanvas } from "@/components/SquareCanvas";
 
+const logo = { url: toAbsoluteUrl(logoAsset.url) };
+const jcb = { url: toAbsoluteUrl(jcbAsset.url) };
 const TITLE = "QianTron — Global Sourcing & Machinery Delivery Across Africa";
 const DESC =
   "Africa's premier heavy equipment sourcing, logistics and delivery partner. Global sourcing, RoRo shipping, port clearance and doorstep delivery.";
 const HERO_URL = jcb.url;
+const HOME_URL = `${PUBLIC_ORIGIN}/`;
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -20,11 +23,11 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: HOME_URL },
       { property: "og:image", content: HERO_URL },
       { name: "twitter:image", content: HERO_URL },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: HOME_URL }],
     scripts: [
       {
         type: "application/ld+json",
@@ -47,7 +50,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "QianTron",
-          url: "/",
+          url: HOME_URL,
           description: DESC,
           publisher: { "@type": "Organization", name: "QianTron" },
         }),
@@ -58,7 +61,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+            { "@type": "ListItem", position: 1, name: "Home", item: HOME_URL },
           ],
         }),
       },

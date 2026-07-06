@@ -150,14 +150,30 @@ function MachinePage() {
     `Hello QianTron,\n\nI would like a full specification and quote for:\n\n  ${m.name} (${m.code})\n  Category: ${c.name}\n  Configuration: ${m.tag}\n\nPlease include lead time, RoRo/container options and doorstep commissioning terms.\n\nThank you.`,
   )}`;
 
-  const extendedSpecs = [
-    ...m.specs.map((s) => ({ k: s.v, v: s.k })),
-    { k: "Model Code", v: m.code },
-    { k: "Configuration", v: m.tag },
-    { k: "Series", v: `${c.ref} · ${c.name}` },
-    { k: "Origin", v: "EU · Japan · China Tier-1" },
-    { k: "Shipping", v: "RoRo · Container · Break-bulk" },
-    { k: "Warranty", v: "24-month powertrain" },
+  const specGroups: { title: string; eyebrow: string; items: { k: string; v: string }[] }[] = [
+    {
+      eyebrow: "Group A",
+      title: "Performance",
+      items: m.specs.map((s) => ({ k: s.v, v: s.k })),
+    },
+    {
+      eyebrow: "Group B",
+      title: "Identity",
+      items: [
+        { k: "Model Code", v: m.code },
+        { k: "Configuration", v: m.tag },
+        { k: "Series", v: `${c.ref} · ${c.name}` },
+      ],
+    },
+    {
+      eyebrow: "Group C",
+      title: "Sourcing & Delivery",
+      items: [
+        { k: "Origin", v: "EU · Japan · China Tier-1" },
+        { k: "Shipping", v: "RoRo · Container · Break-bulk" },
+        { k: "Warranty", v: "24-month powertrain" },
+      ],
+    },
   ];
 
   return (
@@ -234,25 +250,50 @@ function MachinePage() {
         </div>
       </section>
 
-      {/* Full specification table */}
-      <section className="bg-concrete py-24">
+      {/* Full specification table — grouped to mirror JSON-LD additionalProperty groupings */}
+      <section className="bg-concrete py-16 md:py-24">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10">
           <div className="section-eyebrow">Chapter II · Specification</div>
           <h2 className="text-display mt-3 text-4xl font-black md:text-5xl">Technical register.</h2>
+          <p className="mt-4 max-w-2xl text-sm text-steel">
+            Grouped attributes below map one-to-one with the machine-readable
+            structured data on this page — the same schema search engines,
+            procurement systems and quote tools ingest.
+          </p>
 
-          <div className="mt-12 grid grid-cols-1 gap-x-16 gap-y-0 border-t border-border md:grid-cols-2">
-            {extendedSpecs.map((s) => (
+          <div className="mt-10 grid grid-cols-1 gap-6 md:mt-14 md:grid-cols-3 md:gap-8">
+            {specGroups.map((group) => (
               <div
-                key={s.k}
-                className="flex items-baseline justify-between border-b border-border py-5"
+                key={group.title}
+                className="flex flex-col border-t-2 border-dragon bg-arch-white p-6 md:p-7"
               >
-                <div className="text-[11px] uppercase tracking-[0.3em] text-steel">{s.k}</div>
-                <div className="text-display text-lg font-bold text-charcoal">{s.v}</div>
+                <div className="section-eyebrow">{group.eyebrow}</div>
+                <div className="text-display mt-2 text-xl font-black md:text-2xl">
+                  {group.title}
+                </div>
+                <dl className="mt-5 flex flex-col">
+                  {group.items.map((s, i) => (
+                    <div
+                      key={s.k}
+                      className={`flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 ${
+                        i === 0 ? "border-t border-border" : ""
+                      } border-b border-border`}
+                    >
+                      <dt className="text-[10px] font-semibold uppercase tracking-[0.28em] text-steel">
+                        {s.k}
+                      </dt>
+                      <dd className="text-display text-base font-bold text-charcoal sm:text-right sm:text-lg">
+                        {s.v}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Delivery programme */}
       <section className="bg-arch-white py-24">
