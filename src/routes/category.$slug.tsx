@@ -3,6 +3,7 @@ import type { Category } from "@/lib/site";
 import { CATEGORIES, CONTACT, categoryBySlug } from "@/lib/site";
 import { SiteNav, SiteFooter } from "@/components/SiteChrome";
 import { SquareCanvas } from "@/components/SquareCanvas";
+import { FabricPattern } from "@/components/FabricPattern";
 
 export const Route = createFileRoute("/category/$slug")({
   loader: ({ params }) => {
