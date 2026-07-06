@@ -1,12 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/SiteChrome";
-import logo from "@/assets/logo-new.png.asset.json";
-import volvo from "@/assets/volvo.jpg.asset.json";
-import jcb from "@/assets/jcb.jpg.asset.json";
-import komatsu from "@/assets/komatsu.jpg.asset.json";
-import crane from "@/assets/crane.jpg.asset.json";
-import catBlack from "@/assets/cat-black.jpg.asset.json";
-import truckBlue from "@/assets/truck-blue.jpg.asset.json";
+import logoAsset from "@/assets/logo-new.png.asset.json";
+import volvoAsset from "@/assets/volvo.jpg.asset.json";
+import jcbAsset from "@/assets/jcb.jpg.asset.json";
+import komatsuAsset from "@/assets/komatsu.jpg.asset.json";
+import craneAsset from "@/assets/crane.jpg.asset.json";
+import catBlackAsset from "@/assets/cat-black.jpg.asset.json";
+import truckBlueAsset from "@/assets/truck-blue.jpg.asset.json";
+import { toAbsoluteUrl } from "@/lib/site";
+const logo = { url: toAbsoluteUrl(logoAsset.url) };
+const volvo = { url: toAbsoluteUrl(volvoAsset.url) };
+const jcb = { url: toAbsoluteUrl(jcbAsset.url) };
+const komatsu = { url: toAbsoluteUrl(komatsuAsset.url) };
+const crane = { url: toAbsoluteUrl(craneAsset.url) };
+const catBlack = { url: toAbsoluteUrl(catBlackAsset.url) };
+const truckBlue = { url: toAbsoluteUrl(truckBlueAsset.url) };
 
 const TITLE = "About QianTron — Global Sourcing & Machinery Delivery Partner";
 const DESC =
