@@ -23,11 +23,11 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: HOME_URL },
       { property: "og:image", content: HERO_URL },
       { name: "twitter:image", content: HERO_URL },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: HOME_URL }],
     scripts: [
       {
         type: "application/ld+json",
