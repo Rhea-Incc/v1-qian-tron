@@ -81,7 +81,7 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-arch-white/10 pt-8 text-[10px] uppercase tracking-[0.3em] text-arch-white/40 md:flex-row">
           <div>© MMXXV QianTron · All Rights Reserved</div>
-          <div>Corporate Profile · Volume I</div>
+          <div>Volume I</div>
         </div>
       </div>
     </footer>
