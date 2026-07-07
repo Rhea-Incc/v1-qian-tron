@@ -27,20 +27,24 @@ export const Route = createFileRoute("/services/")({
 });
 
 function ServicesPage() {
-  const steps = [
-    "Global Sourcing",
-    "Inspection",
-    "Ocean Shipping",
-    "Port Clearance",
-    "Inland Transport",
-    "Doorstep Delivery",
+  const steps: { slug: "global-sourcing" | "inspection" | "ocean-shipping" | "port-clearance" | "inland-transport" | "doorstep-delivery"; name: string }[] = [
+    { slug: "global-sourcing", name: "Global Sourcing" },
+    { slug: "inspection", name: "Inspection" },
+    { slug: "ocean-shipping", name: "Ocean Shipping" },
+    { slug: "port-clearance", name: "Port Clearance" },
+    { slug: "inland-transport", name: "Inland Transport" },
+    { slug: "doorstep-delivery", name: "Doorstep Delivery" },
   ];
   return (
     <main className="min-h-screen bg-arch-white">
       <SiteNav />
 
-      <section className="relative bg-charcoal py-32 pt-40 text-arch-white">
-        <div className="mx-auto max-w-[1400px] px-6 md:px-10">
+      <section className="relative overflow-hidden bg-charcoal py-32 pt-40 text-arch-white">
+        <FabricPattern
+          className="absolute -bottom-24 -right-20 h-[500px] w-[500px]"
+          tone="gold" corner="br" rings={34} spacing={16} opacity={0.11} motion="drift" duration={32}
+        />
+        <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
           <div className="section-eyebrow !text-dragon">Ecosystem</div>
           <h1 className="text-display mt-4 text-5xl font-black leading-[0.95] md:text-7xl">
             The complete<br />acquisition <span className="text-dragon">ecosystem.</span>
@@ -51,10 +55,17 @@ function ServicesPage() {
 
           <div className="mt-14 grid grid-cols-2 gap-[1px] bg-arch-white/10 md:grid-cols-6">
             {steps.map((s, i) => (
-              <div key={s} className="bg-charcoal p-6">
+              <Link
+                key={s.slug}
+                to="/services/$slug"
+                params={{ slug: s.slug }}
+                className="group bg-charcoal p-6 transition hover:bg-graphite"
+              >
                 <div className="text-editorial text-3xl text-dragon">{String(i + 1).padStart(2, "0")}</div>
-                <div className="text-display mt-4 text-base font-bold">{s}</div>
-              </div>
+                <div className="text-display mt-4 text-base font-bold">{s.name}</div>
+                <div className="mt-3 h-[1px] w-6 bg-dragon transition-all group-hover:w-12" />
+                <div className="mt-2 text-[9px] uppercase tracking-[0.3em] text-arch-white/60 opacity-0 transition group-hover:opacity-100">Open →</div>
+              </Link>
             ))}
           </div>
         </div>
