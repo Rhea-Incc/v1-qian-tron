@@ -120,17 +120,23 @@ function AboutPage() {
           <h2 className="text-display mt-3 text-4xl font-black md:text-5xl">Industries served.</h2>
           <div className="mt-10 grid grid-cols-2 gap-[1px] bg-border md:grid-cols-3">
             {industries.map((it, i) => (
-              <div key={it.h} className="group relative overflow-hidden bg-charcoal aspect-[4/3]">
+              <Link
+                key={it.h}
+                to="/industries/$slug"
+                params={{ slug: it.slug }}
+                className="group relative overflow-hidden bg-charcoal aspect-[4/3]"
+              >
                 <img src={it.img} alt={it.h} className="absolute inset-0 h-full w-full object-cover opacity-60 transition duration-700 group-hover:opacity-40 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
                 <div className="relative flex h-full flex-col justify-between p-6 text-arch-white">
                   <div className="text-editorial text-2xl text-dragon">0{i + 1}</div>
                   <div>
                     <div className="text-display text-2xl font-black">{it.h}</div>
-                    <div className="mt-2 h-[1px] w-8 bg-dragon" />
+                    <div className="mt-2 h-[1px] w-8 bg-dragon transition-all group-hover:w-16" />
+                    <div className="mt-3 text-[10px] uppercase tracking-[0.3em] text-arch-white/70 opacity-0 transition group-hover:opacity-100">Open sector →</div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
