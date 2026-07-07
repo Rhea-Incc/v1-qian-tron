@@ -38,12 +38,12 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   const industries = [
-    { h: "Construction", img: jcb.url },
-    { h: "Mining", img: komatsu.url },
-    { h: "Infrastructure", img: crane.url },
-    { h: "Agriculture", img: volvo.url },
-    { h: "Government", img: catBlack.url },
-    { h: "Logistics", img: truckBlue.url },
+    { slug: "construction", h: "Construction", img: jcb.url },
+    { slug: "mining", h: "Mining", img: komatsu.url },
+    { slug: "infrastructure", h: "Infrastructure", img: crane.url },
+    { slug: "agriculture", h: "Agriculture", img: volvo.url },
+    { slug: "government", h: "Government", img: catBlack.url },
+    { slug: "logistics", h: "Logistics", img: truckBlue.url },
   ];
   return (
     <main className="min-h-screen bg-arch-white">
