@@ -45,9 +45,22 @@ export function SiteNav() {
 export function SiteFooter() {
   return (
     <footer id="contact" className="relative overflow-hidden bg-graphite text-arch-white">
+      {/* Denser fabric layering — multiple emanations at varied corners/tones */}
       <FabricPattern
-        className="absolute -bottom-24 -right-24 h-[520px] w-[520px]"
-        tone="arch" corner="br" rings={40} spacing={16} opacity={0.09} motion="drift" duration={38}
+        className="absolute -bottom-24 -right-24 h-[560px] w-[560px]"
+        tone="arch" corner="br" rings={48} spacing={14} opacity={0.16} motion="drift" duration={38}
+      />
+      <FabricPattern
+        className="absolute -top-32 -left-24 h-[520px] w-[520px]"
+        tone="bronze" corner="tl" rings={40} spacing={16} opacity={0.14} motion="breathe" duration={16}
+      />
+      <FabricPattern
+        className="absolute bottom-[-6rem] left-[10%] h-[380px] w-[380px]"
+        tone="gold" corner="bl" rings={32} spacing={15} opacity={0.10} motion="drift" duration={42}
+      />
+      <FabricPattern
+        className="absolute top-[20%] right-[12%] h-[300px] w-[300px]"
+        tone="dragon" corner="tr" rings={26} spacing={17} opacity={0.09} motion="breathe" duration={13}
       />
       <div className="relative mx-auto max-w-[1400px] px-6 py-24 md:px-10">
         <div className="flex flex-col items-center text-center">
